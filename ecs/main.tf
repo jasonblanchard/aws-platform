@@ -41,15 +41,15 @@ resource "aws_alb" "app" {
 }
 
 resource "aws_alb_target_group" "test" {
-  name     = "tf-example-ecs-app"
-  port     = 80
-  protocol = "HTTP"
-  vpc_id   = "vpc-008da0625cb4025d8"
+  name        = "tf-example-ecs-app"
+  port        = 80
+  protocol    = "HTTP"
+  vpc_id      = "vpc-008da0625cb4025d8"
   target_type = "ip"
 
   health_check {
-    interval = 10
-    healthy_threshold = 2
+    interval            = 10
+    healthy_threshold   = 2
     unhealthy_threshold = 2
   }
 }
@@ -94,7 +94,7 @@ resource "aws_ecs_cluster" "foo" {
   name = "example-from-tf"
 
   setting {
-    name = "containerInsights"
+    name  = "containerInsights"
     value = "disabled"
   }
 }
@@ -129,7 +129,7 @@ data "template_file" "task_definition" {
   template = "${file("${path.module}/task-definition.json")}"
 
   vars = {
-    log_group_name   = "${aws_cloudwatch_log_group.ecs.name}"
+    log_group_name = "${aws_cloudwatch_log_group.ecs.name}"
   }
 }
 
@@ -153,8 +153,8 @@ resource "aws_ecs_service" "app" {
   launch_type     = "FARGATE"
 
   network_configuration {
-    subnets         = ["subnet-024e3207afb8d1a5c"]
-    security_groups = ["sg-00f8b47417ace3e81"]
+    subnets          = ["subnet-024e3207afb8d1a5c"]
+    security_groups  = ["sg-00f8b47417ace3e81"]
     assign_public_ip = true
   }
 
