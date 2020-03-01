@@ -1,7 +1,8 @@
 const { handler } = require('./index');
 
 async function main() {
-  await handler({}, {});
+  const response = await handler({}, {});
+  console.log(response);
 }
 
 main();
